@@ -1,2 +1,2 @@
 # AutomaticTimeTableGenerator
-Automatic time table generator without login or register page
+Automatic time table generator with login and register page
