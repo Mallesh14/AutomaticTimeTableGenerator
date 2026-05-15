@@ -29,7 +29,7 @@ export default function FacultyDashboard({ user, onLogout }) {
         setError('Error loading faculty data.');
       })
       .finally(() => setLoading(false));
-  }, [user.email]);
+  }, [user?.email]);
 
   // Handle password reset
   const handlePwChange = async (e) => {
@@ -81,23 +81,28 @@ export default function FacultyDashboard({ user, onLogout }) {
     return (
       <div className="min-vh-100 d-flex align-items-center justify-content-center edu-content">
         <div className="text-center">
-          <div className="edu-card p-5">
+          <div className="edu-card p-5" style={{ maxWidth: '450px' }}>
             <div className="mb-4">
               <div className="bg-danger bg-opacity-10 rounded-circle mx-auto d-flex align-items-center justify-content-center" style={{width: '80px', height: '80px'}}>
                 <i className="fas fa-exclamation-triangle text-danger" style={{fontSize: '32px'}}></i>
               </div>
             </div>
-            <h5 className="text-danger fw-bold mb-3">Error Loading Faculty Data</h5>
-            <p className="edu-text-gray mb-4">{error}</p>
-            <button className="edu-button-primary" onClick={() => window.location.reload()}>
-              <i className="fas fa-redo me-2"></i>
-              Try Again
+            <h5 className="text-danger fw-bold mb-3">Faculty Profile Not Found</h5>
+            <p className="edu-text-gray mb-2">{error}</p>
+            <p className="edu-text-gray small mb-4">
+              Your login account exists, but no faculty profile is linked to <strong>{user?.email}</strong>.<br />
+              Please ask the admin to add you as a faculty member first.
+            </p>
+            <button className="btn btn-outline-danger w-100" onClick={onLogout}>
+              <i className="fas fa-sign-out-alt me-2"></i>
+              Logout
             </button>
           </div>
         </div>
       </div>
     );
   }
+
 
   if (!info) return null;
 
